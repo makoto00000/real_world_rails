@@ -1,13 +1,13 @@
 <div class="article-page">
   <div class="banner">
     <div class="container">
-      <h1>How to build webapps that scale</h1>
+      <h1><%= @article.title %></h1>
 
       <div class="article-meta">
         <a href="/profile/eric-simons"><img src="http://i.imgur.com/Qr71crq.jpg" /></a>
         <div class="info">
-          <a href="/profile/eric-simons" class="author">Eric Simons</a>
-          <span class="date">January 20th</span>
+          <%= link_to "#{@article.user.name}", "/" %>
+          <%= content_tag :span, "#{@article.created_at}", class: 'date' %>
         </div>
         <button class="btn btn-sm btn-outline-secondary">
           <i class="ion-plus-round"></i>
@@ -32,13 +32,14 @@
     <div class="row article-content">
       <div class="col-md-12">
         <p>
-          Web development technologies have evolved at an incredible clip over the past few years.
+          <%= @article.description %>
         </p>
         <h2 id="introducing-ionic">Introducing RealWorld.</h2>
-        <p>It's a great solution for learning how other frameworks work.</p>
+        <p><%= @article.body %></p>
         <ul class="tag-list">
-          <li class="tag-default tag-pill tag-outline">realworld</li>
-          <li class="tag-default tag-pill tag-outline">implementations</li>
+          <% @article.tags.each do |tag| %>
+            <%= content_tag :li, "#{tag.name}", class: 'tag-default tag-pill tag-outline' %>
+          <% end %>
         </ul>
       </div>
     </div>

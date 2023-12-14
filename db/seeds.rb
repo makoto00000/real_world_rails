@@ -33,8 +33,8 @@ end
         body: Faker::Lorem.paragraph(sentence_count: 10),
       ) do |article|
         article.save!
-        article.tags << Tag.offset(rand(Tag.count)).first
-        # article.tags = Tag.find(rand(1..10))
+        # article.tags << Tag.offset(rand(Tag.count)).first
+        article.tags = Tag.all.sample(rand(1..3))
       end
     end
   end

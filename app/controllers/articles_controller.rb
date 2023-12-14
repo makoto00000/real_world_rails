@@ -1,5 +1,8 @@
 class ArticlesController < ApplicationController
   def index
+    # @articles = Article.all
+    @articles = Article.paginate(page: params[:page])
+    @tags = Tag.all
   end
 
   def new
@@ -9,5 +12,6 @@ class ArticlesController < ApplicationController
   end
 
   def show
+    @article = Article.find(params[:id])
   end
 end

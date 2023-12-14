@@ -32,6 +32,9 @@ gem "redis", "~> 4.0"
 
 gem "bootstrap-sass",  "3.4.1"
 gem "sassc-rails",     "2.1.2"
+gem 'will_paginate',           '3.1.5'
+gem 'bootstrap-will_paginate', '1.0.0'
+gem 'bcrypt',                  '3.1.11'
 
 gem "faker"
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]

@@ -2,6 +2,7 @@ class User < ApplicationRecord
   attr_accessor :password
 
   has_many :articles
+  before_save :downcase_email
   before_save :hash_password
 
   validates :name,
@@ -20,8 +21,8 @@ class User < ApplicationRecord
             presence: true,
             length: { minimum: 6 }
 
-  def self.digest(string)
-    cost = BCrypt::Engine::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
+  def digest(string)
+    cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
     BCrypt::Password.create(string, cost: cost)
   end
 
@@ -36,7 +37,7 @@ class User < ApplicationRecord
   end
 
   def hash_password
-    self.encrypted_password = BCrypt::Password.create(password)
+    self.encrypted_password = digest(password)
   end
 
 end

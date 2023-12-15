@@ -21,7 +21,7 @@ end
   User.new(
     name: Faker::Internet.unique.username(separators: []),
     email: Faker::Internet.email,
-    encrypted_password: 'password',
+    password: 'password',
     image_url: Faker::LoremFlickr.image
   ) do |user|
     user.save!

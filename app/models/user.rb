@@ -21,13 +21,15 @@ class User < ApplicationRecord
             presence: true,
             length: { minimum: 6 }
 
-  def digest(string)
+  def self.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
     BCrypt::Password.create(string, cost: cost)
   end
 
   def authenticated?(password)
-    BCrypt::Password.new(encrypted_password) == password
+    digest = self.send("encrypted_password")
+    return false if digest.nil?
+    BCrypt::Password.new(digest).is_password?(password)
   end
 
   private
@@ -37,7 +39,7 @@ class User < ApplicationRecord
   end
 
   def hash_password
-    self.encrypted_password = digest(password)
+    self.encrypted_password = User.digest(password)
   end
 
 end

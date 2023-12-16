@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   root 'articles#index'
+  get '/editor', to: 'articles#new'
   get '/register', to: 'users#new'
   get '/settings', to: 'users#edit'
   get '/login', to: 'sessions#new'

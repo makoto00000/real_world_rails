@@ -18,5 +18,6 @@ class UsesSignup < ActionDispatch::IntegrationTest
     assert_response 302
     follow_redirect!
     assert_template 'index'
+    assert is_logged_in?
   end
 end

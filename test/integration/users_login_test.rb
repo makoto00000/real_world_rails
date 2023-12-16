@@ -30,3 +30,13 @@ class ValidLoginTest < ValidLogin
     assert is_logged_in?
   end
 end
+
+class LogoutTest < ValidLogin
+  test "logout" do
+    delete logout_path
+    assert_not is_logged_in?
+    assert_response :see_other
+    follow_redirect!
+    assert_template 'index'
+  end
+end

@@ -1,7 +1,7 @@
 class CreateArticles < ActiveRecord::Migration[7.0]
   def change
     create_table :articles do |t|
-      t.string :slug, null: false
+      t.string :slug
       t.string :title, null: false
       t.string :description, null: false
       t.text :body, null: false

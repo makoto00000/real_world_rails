@@ -34,7 +34,7 @@
         <% end %>
       </div>
       <%# editページの初回 %>
-      <% elsif current_page?(edit_article_path(@article)) && !destroys  %>
+      <% elsif !current_page?(editor_path) && !destroys  %>
         <div class="tag-list" id="tag-list">
         <% @article.tags&.each do |tag| %>
           <span class="tag-default tag-pill"> <i class="ion-close-round"></i> <%= tag.name %> </span>

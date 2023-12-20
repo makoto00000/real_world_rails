@@ -22,9 +22,9 @@
           <i class="ion-edit"></i> Edit Article
         <% end %>
 
-        <button class="btn btn-sm btn-outline-danger">
+        <%= link_to(@article, data: { "turbo-method": :delete, turbo_confirm: "really delete this article?" }, class: "btn btn-sm btn-outline-danger") do %>
           <i class="ion-trash-a"></i> Delete Article
-        </button>
+        <% end %>
       </div>
     </div>
   </div>
@@ -66,12 +66,12 @@
           <i class="ion-heart"></i>
           &nbsp; Favorite Article <span class="counter">(29)</span>
         </button>
-        <button class="btn btn-sm btn-outline-secondary">
+        <%= button_to(edit_article_path(@article), {method: :get, class: 'btn btn-sm btn-outline-secondary'} ) do %>
           <i class="ion-edit"></i> Edit Article
-        </button>
-        <button class="btn btn-sm btn-outline-danger">
+        <% end %>
+        <%= link_to(@article, data: { "turbo-method": :delete, turbo_confirm: "really delete this article?" }, class: "btn btn-sm btn-outline-danger") do %>
           <i class="ion-trash-a"></i> Delete Article
-        </button>
+        <% end %>
       </div>
     </div>
 

@@ -16,12 +16,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_13_113747) do
     t.bigint "tag_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["article_id", "tag_id"], name: "index_article_tags_on_article_id_and_tag_id", unique: true
     t.index ["article_id"], name: "index_article_tags_on_article_id"
     t.index ["tag_id"], name: "index_article_tags_on_tag_id"
   end
 
   create_table "articles", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.string "slug", null: false
+    t.string "slug"
     t.string "title", null: false
     t.string "description", null: false
     t.text "body", null: false

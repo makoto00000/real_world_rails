@@ -13,3 +13,19 @@
  *= require_tree .
  *= require_self
  */
+
+.remove_nested_fields {
+display: none;
+}
+
+#add-button {
+  display: none;
+}
+
+.hidden-tags {
+  display: none !important;
+}
+
+.hidden-pill {
+  display: none !important;
+}

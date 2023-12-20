@@ -18,6 +18,8 @@ gem "jbuilder",        "2.11.5"
 gem "puma",            "5.6.5"
 gem "bootsnap",        "1.16.0", require: false
 gem "mysql2", "~> 0.5"
+gem "nested_form"
+gem 'jquery-rails'
 
 group :development, :test do
   gem "debug",   "1.7.1", platforms: %i[ mri mingw x64_mingw ]

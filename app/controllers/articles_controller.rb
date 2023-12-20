@@ -7,18 +7,37 @@ class ArticlesController < ApplicationController
 
   def new
     @article = Article.new
+    @article.tags.build
   end
 
-  def create
-    @article = current_user.article.build(article_params)
+  def create # rubocop:disable Metrics/MethodLength
+    @article = current_user.articles.build(article_params)
+    unless @article.tags.blank?
+      tags = []
+      @article.tags.each do |tag|
+        tags << Tag.find_or_create_by(name: tag.name)
+      end
+      @article.tags = tags
+    end
+
     if @article.save
-      redirect_to root_path
+      redirect_to @article
     else
-      render 'articles/new'
+      render 'articles/new', status: :unprocessable_entity
     end
   end
 
   def edit
+    @article = Article.find(params[:id])
+  end
+
+  def update
+    @article = Article.find(params[:id])
+    if @article.update(article_params)
+      redirect_to @article
+    else
+      render 'edit', status: :unprocessable_entity
+    end
   end
 
   def show
@@ -27,6 +46,6 @@ class ArticlesController < ApplicationController
 
   private
     def article_params
-      params.require(:article).permit(:title, :description, :body, :tags)
+      params.require(:article).permit(:title, :description, :body, tags_attributes:[:name, :_destroy])
     end
 end

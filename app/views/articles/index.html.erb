@@ -26,7 +26,7 @@
               <%= link_to image_tag("#{article.user.image_url}"), "/"  %>
               <%# <a href="/profile/eric-simons"><img src="http://i.imgur.com/Qr71crq.jpg" /></a> %>
               <div class="info">
-                <%= link_to "#{article.user.name}", "/", class: 'date' %>
+                <%= link_to "#{article.user.name}", user_path(article.user), class: 'date' %>
                 <%# <a href="/profile/eric-simons" class="author">Eric Simons</a> %>
 
                 <%= content_tag :span, "#{article.formatted_created_at}" %>
@@ -49,20 +49,6 @@
         <% end %>
 
         <%= will_paginate class: 'pagination' %>
-        <script>
-          document.addEventListener('DOMContentLoaded', function() {
-            const paginationItems = document.querySelectorAll('.pagination li');
-            const paginationItemslinks = document.querySelectorAll('.pagination li a');
-            paginationItems.forEach(item => {
-              // ここで追加のクラスを付与
-              item.classList.add('page-item');
-            });
-            paginationItemslinks.forEach(item => {
-              // ここで追加のクラスを付与
-              item.classList.add('page-link');
-            });
-          });
-        </script>
       </div>
 
       <div class="col-md-3">

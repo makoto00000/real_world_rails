@@ -8,6 +8,7 @@ import jquery from "jquery"
 //= require_tree .
 window.$ = jquery
 
+// gem nested_formの記述
 $(function () {
   window.NestedFormEvents = function() {
     this.addFields = $.proxy(this.addFields, this);
@@ -120,6 +121,20 @@ $(function () {
                 }
                 return $();//nothing found
         };
+});
+
+// will_paginationにclassを当てる
+document.addEventListener('DOMContentLoaded', function() {
+  const paginationItems = document.querySelectorAll('.pagination li');
+  const paginationItemslinks = document.querySelectorAll('.pagination li a');
+  paginationItems.forEach(item => {
+    // ここで追加のクラスを付与
+    item.classList.add('page-item');
+  });
+  paginationItemslinks.forEach(item => {
+    // ここで追加のクラスを付与
+    item.classList.add('page-link');
+  });
 });
 
 // article投稿フォームのtag選択機能

@@ -4,10 +4,10 @@
       <h1><%= @article.title %></h1>
 
       <div class="article-meta">
-        <a href="/profile/eric-simons"><img src="http://i.imgur.com/Qr71crq.jpg" /></a>
+        <%= image_tag  "#{@article.user.image_url}"%>
         <div class="info">
-          <%= link_to "#{@article.user.name}", "/" %>
-          <%= content_tag :span, "#{@article.created_at}", class: 'date' %>
+          <%= link_to "#{@article.user.name}", @article.user %>
+          <%= content_tag :span, "#{@article.formatted_created_at}", class: 'date' %>
         </div>
         <button class="btn btn-sm btn-outline-secondary">
           <i class="ion-plus-round"></i>
@@ -18,9 +18,10 @@
           <i class="ion-heart"></i>
           &nbsp; Favorite Post <span class="counter">(29)</span>
         </button>
-        <button class="btn btn-sm btn-outline-secondary">
+        <%= button_to(edit_article_path(@article), {method: :get, class: 'btn btn-sm btn-outline-secondary'} ) do %>
           <i class="ion-edit"></i> Edit Article
-        </button>
+        <% end %>
+
         <button class="btn btn-sm btn-outline-danger">
           <i class="ion-trash-a"></i> Delete Article
         </button>
@@ -48,15 +49,17 @@
 
     <div class="article-actions">
       <div class="article-meta">
-        <a href="profile.html"><img src="http://i.imgur.com/Qr71crq.jpg" /></a>
+        <%= link_to(@article.user) do %>
+          <%= image_tag "#{@article.user.image_url}" %>
+        <% end %>
         <div class="info">
-          <a href="" class="author">Eric Simons</a>
-          <span class="date">January 20th</span>
+          <%= link_to @article.user.name, class: "author" %>
+          <%= tag.span "#{@article.formatted_created_at}", class: "date" %>
         </div>
 
         <button class="btn btn-sm btn-outline-secondary">
           <i class="ion-plus-round"></i>
-          &nbsp; Follow Eric Simons
+          &nbsp; Follow <%= @article.user.name %>
         </button>
         &nbsp;
         <button class="btn btn-sm btn-outline-primary">
@@ -79,7 +82,7 @@
             <textarea class="form-control" placeholder="Write a comment..." rows="3"></textarea>
           </div>
           <div class="card-footer">
-            <img src="http://i.imgur.com/Qr71crq.jpg" class="comment-author-img" />
+            <%= image_tag "#{current_user.image_url}", class: "comment-author-img" %>
             <button class="btn btn-sm btn-primary">Post Comment</button>
           </div>
         </form>

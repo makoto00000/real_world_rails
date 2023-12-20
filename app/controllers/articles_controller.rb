@@ -31,9 +31,16 @@ class ArticlesController < ApplicationController
     @article = Article.find(params[:id])
   end
 
-  def update
+  def update # rubocop:disable Metrics/MethodLength
     @article = Article.find(params[:id])
-    if @article.update(article_params)
+    @article.tags = []
+    @article.assign_attributes(article_params)
+    unless @article.tags.blank?
+      @article.tags = @article.tags.map do |tag|
+        Tag.find_or_create_by(name: tag.name)
+      end
+    end
+    if @article.save
       redirect_to @article
     else
       render 'edit', status: :unprocessable_entity

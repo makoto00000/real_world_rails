@@ -132,6 +132,34 @@ $(function () {
   let fields = document.querySelectorAll('.fields')
   let destroys = getHiddenInputs();
 
+  const tagHiddenInputsValues = Array.from(tagHiddenInputs).map(input => input.value.trim());
+
+  const tagPillsValues = Array.from(tagPills).map(tagPill => tagPill.textContent.trim());
+
+  if (tagHiddenInputs[0].value !== ""){
+    let deleteIndexes = findDeletedIndexes(tagHiddenInputsValues, tagPillsValues)
+    deleteIndexes.forEach((deleteIndex) => {
+      deleteButtons[deleteIndex].click();
+    })
+    updateTagList();
+  }
+
+  function findDeletedIndexes(arr1, arr2) {
+    const largerArray = arr1.length >= arr2.length ? arr1 : arr2;
+    const smallerArray = arr1.length >= arr2.length ? arr2 : arr1;
+    const deletedIndexes = [];
+    let appearedList = []
+    for (let i = 0; i < largerArray.length; i++) {
+      const currentElement = largerArray[i];
+      if (!smallerArray.includes(currentElement) || appearedList.includes(currentElement)) {
+        deletedIndexes.push(i);
+      } else if (!appearedList.includes(currentElement)) {
+        appearedList.push(currentElement)
+      }
+    }
+    return deletedIndexes;
+  }
+
   function getHiddenInputs() {
     const fieldsElements = document.querySelectorAll('.fields');
     const hiddenInputs = [];
@@ -183,6 +211,7 @@ $(function () {
     }
   })
 
+  // 422エラーでrenderメソッドで呼ばれた時
 document.addEventListener("turbo:render", function() {
   const tagInput = document.getElementById('tag-input')
   const addButton = document.getElementById('add-button')

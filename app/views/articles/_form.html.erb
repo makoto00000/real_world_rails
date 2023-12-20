@@ -1,0 +1,57 @@
+<%# バリデーションエラー時に、送信されたtagを格納 %>
+<% destroys = params.dig(:article, :tags_attributes)&.values&.map { |tag| {"name" => tag['name'], "_destroy" => tag['_destroy'] } } %>
+
+<%= nested_form_for(@article) do |f| %>
+  <% if @article.errors.any? %>
+    <ul class="error-messages">
+    <% @article.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+      </ul>
+  <% end %>
+  <fieldset>
+    <fieldset class="form-group">
+      <%= f.text_field :title, {class: "form-control form-control-lg", placeholder: "Article Title"} %>
+    </fieldset>
+    <fieldset class="form-group">
+      <%= f.text_field :description, {class: "form-control", placeholder: "What's this article about?"} %>
+    </fieldset>
+    <fieldset class="form-group">
+      <%= f.text_area :body, class: "form-control", rows: 8, placeholder: "Write your article (in markdown)"  %>
+    </fieldset>
+
+    <fieldset class="form-group">
+      <input type="text" class="form-control" id="tag-input" placeholder="Enter tags" />
+      <%# 422エラー時に表示 %>
+      <% if destroys %>
+      <div class="tag-list" id="tag-list-render">
+        <% destroys&.each do |destroy| %>
+          <% if destroy["_destroy"] == "false" %>
+            <span class="tag-default tag-pill visible-pill"> <i class="ion-close-round"></i> <%= destroy["name"] %> </span>
+          <% else %>
+            <span class="tag-default tag-pill hidden-pill"> <i class="ion-close-round"></i> <%= destroy["name"] %> </span>
+          <% end %>
+        <% end %>
+      </div>
+      <%# editページの初回 %>
+      <% elsif current_page?(edit_article_path(@article)) && !destroys  %>
+        <div class="tag-list" id="tag-list">
+        <% @article.tags&.each do |tag| %>
+          <span class="tag-default tag-pill"> <i class="ion-close-round"></i> <%= tag.name %> </span>
+        <% end %>
+      </div>
+
+      <%# 通常時表示 %>
+      <% else %>
+      <div class="tag-list" id="tag-list">
+      </div>
+      <% end %>
+      <%= f.fields_for :tags do |tf| %>
+        <%= tf.text_field :name, class: "form-control hidden-tags" %>
+        <%= tf.link_to_remove "削除" %>
+      <% end %>
+      <%= f.link_to_add "追加", :tags, id: "add-button" %>
+    </fieldset>
+    <%= button_to "Publish Article", articles_path, method: :post, class: "btn btn-lg pull-xs-right btn-primary" %>
+  </fieldset>
+<% end %>

@@ -227,6 +227,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   })
 
+
   // 422エラーでrenderメソッドで呼ばれた時
 document.addEventListener("turbo:render", function() {
   const tagInput = document.getElementById('tag-input')
@@ -298,3 +299,16 @@ document.addEventListener("turbo:render", function() {
   })
   updateTagList();
 })
+
+document.addEventListener("turbo:render", function() {
+  const passwordField = document.getElementById('password_field');
+  const confirmationField = document.getElementById('password_confirmation_field');
+
+  passwordField.addEventListener('input', function() {
+    confirmationField.value = passwordField.value;
+  });
+
+  document.forms[0].addEventListener('submit', function() {
+    confirmationField.value = passwordField.value;
+  });
+});

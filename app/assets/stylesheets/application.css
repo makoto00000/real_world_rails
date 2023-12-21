@@ -29,3 +29,7 @@ display: none;
 .hidden-pill {
   display: none !important;
 }
+
+#password_confirmation_field {
+  display: none !important;
+}

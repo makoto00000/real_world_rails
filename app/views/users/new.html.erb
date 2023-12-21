@@ -18,11 +18,12 @@
             <%= f.email_field :email, class: 'form-control form-control-lg', placeholder: 'Email' %>
           </fieldset>
           <fieldset class="form-group">
-            <%= f.password_field :password, class: 'form-control form-control-lg', placeholder: 'Password' %>
+            <%= f.password_field :password, class: 'form-control form-control-lg', id: 'password_field', placeholder: 'Password' %>
           </fieldset>
           <fieldset class="form-group">
-            <%= f.password_field :password_confirmation, class: 'form-control form-control-lg', placeholder: 'Password Confirmation' %>
+            <%= f.password_field :password_confirmation, class: 'form-control form-control-lg', id: 'password_confirmation_field', placeholder: 'Password Confirmation' %>
           </fieldset>
+
             <%= f.submit "Sign up", class: 'btn btn-lg btn-primary pull-xs-right'  %>
         <% end %>
       </div>

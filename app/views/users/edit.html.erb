@@ -4,41 +4,34 @@
       <div class="col-md-6 offset-md-3 col-xs-12">
         <h1 class="text-xs-center">Your Settings</h1>
 
-        <ul class="error-messages">
-          <li>That name is required</li>
-        </ul>
+        <%= form_with(model: @user) do |f| %>
+          <% if @user.errors.any? %>
+            <ul class="error-messages">
+            <% @user.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+              </ul>
+          <% end %>
+        <%= tag.fieldset %>
+          <%= tag.fieldset class: "form-group" do %>
+            <%= f.text_field :image_url, class: "form-control", placeholder: "URL of profile picture" %>
+          <% end %>
+          <%= tag.fieldset class: "form-group" do %>
+            <%= f.text_field :name, class: "form-control form-control-lg", placeholder: "Your Name" %>
+          <% end %>
+          <%= tag.fieldset class: "form-group" do %>
+            <%= f.text_area :bio, class: "form-control form-control-lg", row: 8, placeholder: "Short bio about you" %>
+          <% end %>
+          <%= tag.fieldset class: "form-group" do %>
+            <%= f.text_field :email, class: "form-control form-control-lg", placeholder: "Email" %>
+          <% end %>
+          <%= tag.fieldset class: "form-group" do %>
+            <%= f.password_field :password, class: "form-control form-control-lg", placeholder: "New Password" %>
+          <% end %>
+          <%= f.submit "Update Settings", class: "btn btn-lg btn-primary pull-xs-right" %>
+        <% end %>
 
-        <form>
-          <fieldset>
-            <fieldset class="form-group">
-              <input class="form-control" type="text" placeholder="URL of profile picture" />
-            </fieldset>
-            <fieldset class="form-group">
-              <input class="form-control form-control-lg" type="text" placeholder="Your Name" />
-            </fieldset>
-            <fieldset class="form-group">
-              <textarea
-                class="form-control form-control-lg"
-                rows="8"
-                placeholder="Short bio about you"
-              ></textarea>
-            </fieldset>
-            <fieldset class="form-group">
-              <input class="form-control form-control-lg" type="text" placeholder="Email" />
-            </fieldset>
-            <fieldset class="form-group">
-              <input
-                class="form-control form-control-lg"
-                type="password"
-                placeholder="New Password"
-              />
-            </fieldset>
-            <button class="btn btn-lg btn-primary pull-xs-right">Update Settings</button>
-          </fieldset>
-        </form>
-        <hr />
         <%= button_to "Or click here to logout.", logout_path,  { method: :delete, class: 'btn btn-outline-danger' } %>
-        <%# <button class="btn btn-outline-danger">Or click here to logout.</button> %>
       </div>
     </div>
   </div>

@@ -151,13 +151,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
   const tagPillsValues = Array.from(tagPills).map(tagPill => tagPill.textContent.trim());
 
-  if (tagHiddenInputs[0].value !== ""){
+  if (tagHiddenInputs[0]?.value !== ""){
     let deleteIndexes = findDeletedIndexes(tagHiddenInputsValues, tagPillsValues)
     deleteIndexes.forEach((deleteIndex) => {
       deleteButtons[deleteIndex].click();
     })
     updateTagList();
   }
+
 
   function findDeletedIndexes(arr1, arr2) {
     const largerArray = arr1.length >= arr2.length ? arr1 : arr2;
@@ -214,7 +215,7 @@ document.addEventListener('DOMContentLoaded', function() {
   tagInput.addEventListener('keypress', function(e) {
     if (e.key === 'Enter') {
       e.preventDefault();
-      if (tagHiddenInputs[0].value !== ""){
+      if (tagHiddenInputs[0]?.value !== ""){
         addButton.click();
       }
       tagHiddenInputs = document.querySelectorAll('.hidden-tags')
@@ -237,7 +238,7 @@ document.addEventListener("turbo:render", function() {
   let tagPills = document.getElementsByClassName('visible-pill')
   const tagPillsValues = Array.from(tagPills).map(tagPill => tagPill.textContent.trim());
 
-  if (tagHiddenInputs[0].value !== ""){
+  if (tagHiddenInputs[0]?.value !== ""){
     let deleteIndexes = findDeletedIndexes(tagHiddenInputsValues, tagPillsValues)
     deleteIndexes.forEach((deleteIndex) => {
       deleteButtons[deleteIndex].click();
@@ -284,7 +285,7 @@ document.addEventListener("turbo:render", function() {
   tagInput.addEventListener('keypress', function(e) {
     if (e.key === 'Enter') {
       e.preventDefault();
-      if (tagHiddenInputs[0].value !== ""){
+      if (tagHiddenInputs[0]?.value !== ""){
         addButton.click();
       }
       tagHiddenInputs = document.querySelectorAll('.hidden-tags')

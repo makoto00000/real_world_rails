@@ -20,6 +20,9 @@
           <fieldset class="form-group">
             <%= f.password_field :password, class: 'form-control form-control-lg', placeholder: 'Password' %>
           </fieldset>
+          <fieldset class="form-group">
+            <%= f.password_field :password_confirmation, class: 'form-control form-control-lg', placeholder: 'Password Confirmation' %>
+          </fieldset>
             <%= f.submit "Sign up", class: 'btn btn-lg btn-primary pull-xs-right'  %>
         <% end %>
       </div>

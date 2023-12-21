@@ -21,7 +21,7 @@ end
 class ValidLogin < UsersLogin
   def setup
     super
-    post login_path, params: { session: { email: @user.email, password: 'password' } }
+    post login_path, params: { session: { email: @user.email, password: 'password', password_confirmation: 'password' } }
   end
 end
 

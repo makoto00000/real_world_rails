@@ -28,6 +28,9 @@
           <%= tag.fieldset class: "form-group" do %>
             <%= f.password_field :password, class: "form-control form-control-lg", placeholder: "New Password" %>
           <% end %>
+          <%= tag.fieldset class: "form-group" do %>
+            <%= f.password_field :password_confirmation, class: "form-control form-control-lg", placeholder: "New Password" %>
+          <% end %>
           <%= f.submit "Update Settings", class: "btn btn-lg btn-primary pull-xs-right" %>
         <% end %>
 

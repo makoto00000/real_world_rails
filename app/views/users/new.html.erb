@@ -1,0 +1,29 @@
+<div class="auth-page">
+  <div class="container page">
+    <div class="row">
+      <div class="col-md-6 offset-md-3 col-xs-12">
+
+        <h1 class="text-xs-center">Sign up</h1>
+        <p class="text-xs-center">
+          <a href="/login">Have an account?</a>
+        </p>
+
+        <%= render 'shared/error_messages', object: @user %>
+
+        <%= form_with(model: @user) do |f| %>
+          <fieldset class="form-group">
+            <%= f.text_field :name, class: 'form-control form-control-lg', placeholder: 'Username' %>
+          </fieldset>
+          <fieldset class="form-group">
+            <%= f.email_field :email, class: 'form-control form-control-lg', placeholder: 'Email' %>
+          </fieldset>
+          <fieldset class="form-group">
+            <%= f.password_field :password, class: 'form-control form-control-lg', id: 'password_field', placeholder: 'Password' %>
+          </fieldset>
+
+            <%= f.submit "Sign up", class: 'btn btn-lg btn-primary pull-xs-right'  %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

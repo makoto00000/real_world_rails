@@ -6,12 +6,33 @@
         <!-- Add "active" class when you're on that page" -->
         <a class="nav-link active" href="/">Home</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/login">Sign in</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/register">Sign up</a>
-      </li>
+      <% if logged_in? %>
+        <li class="nav-item">
+          <a class="nav-link" href="/editor"> <i class="ion-compose"></i>&nbsp;New Article </a>
+        </li>
+        <li class="nav-item">
+          <%= link_to(edit_user_path(current_user), class: 'nav-link') do %> 
+            <i class="ion-gear-a"></i>&nbsp;Settings
+          <% end %>
+        </li>
+        <li class="nav-item">
+          <%= link_to(current_user, class: 'nav-link') do %>
+          <%= image_tag "#{current_user.image_url}", class: 'user-pic' %>
+          <%= "#{current_user.name}" %>
+          <% end %>
+          <%# <a class="nav-link" href="/profile/eric-simons">
+            <img src="" class="user-pic" />
+            Eric Simons
+          </a> %>
+        </li>
+      <% else %>
+        <li class="nav-item">
+          <a class="nav-link" href="/login">Sign in</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/register">Sign up</a>
+        </li>
+      <% end %>
     </ul>
   </div>
 </nav>

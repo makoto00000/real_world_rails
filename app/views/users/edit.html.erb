@@ -1,0 +1,38 @@
+<div class="settings-page">
+  <div class="container page">
+    <div class="row">
+      <div class="col-md-6 offset-md-3 col-xs-12">
+        <h1 class="text-xs-center">Your Settings</h1>
+
+        <%= form_with(model: @user) do |f| %>
+          <% if @user.errors.any? %>
+            <ul class="error-messages">
+            <% @user.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+              </ul>
+          <% end %>
+        <%= tag.fieldset %>
+          <%= tag.fieldset class: "form-group" do %>
+            <%= f.text_field :image_url, class: "form-control", placeholder: "URL of profile picture" %>
+          <% end %>
+          <%= tag.fieldset class: "form-group" do %>
+            <%= f.text_field :name, class: "form-control form-control-lg", placeholder: "Your Name" %>
+          <% end %>
+          <%= tag.fieldset class: "form-group" do %>
+            <%= f.text_area :bio, class: "form-control form-control-lg", row: 8, placeholder: "Short bio about you" %>
+          <% end %>
+          <%= tag.fieldset class: "form-group" do %>
+            <%= f.text_field :email, class: "form-control form-control-lg", placeholder: "Email" %>
+          <% end %>
+          <fieldset class="form-group">
+            <%= f.password_field :password, class: 'form-control form-control-lg', id: 'password_field', placeholder: 'New Password' %>
+          </fieldset>
+          <%= f.submit "Update Settings", class: "btn btn-lg btn-primary pull-xs-right" %>
+        <% end %>
+
+        <%= button_to "Or click here to logout.", logout_path,  { method: :delete, class: 'btn btn-outline-danger' } %>
+      </div>
+    </div>
+  </div>
+</div>

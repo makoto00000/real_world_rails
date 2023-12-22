@@ -1,21 +1,38 @@
-<div class="home-page">
-  <div class="banner">
+<div class="profile-page">
+  <div class="user-info">
     <div class="container">
-      <h1 class="logo-font">conduit</h1>
-      <p>A place to share your knowledge.</p>
+      <div class="row">
+        <div class="col-xs-12 col-md-10 offset-md-1">
+          <%= image_tag "#{@user.image_url}", class: "user-img" %>
+          <%= tag.h4 @user.name %>
+          <%= tag.p @user.bio %>
+
+          <button class="btn btn-sm btn-outline-secondary action-btn">
+            <i class="ion-plus-round"></i>
+            &nbsp; <%= @user.name %>
+          </button>
+
+          <% if current_user == @user %>
+            <%= link_to(edit_user_path(@user), class: "btn btn-sm btn-outline-secondary action-btn") do %>
+              <i class="ion-gear-a"></i>
+              &nbsp; Edit Profile Settings
+            <% end %>
+          <% end %>
+        </div>
+      </div>
     </div>
   </div>
 
-  <div class="container page">
+  <div class="container">
     <div class="row">
-      <div class="col-md-9">
-        <div class="feed-toggle">
+      <div class="col-xs-12 col-md-10 offset-md-1">
+        <div class="articles-toggle">
           <ul class="nav nav-pills outline-active">
             <li class="nav-item">
-              <a class="nav-link" href="">Your Feed</a>
+              <a class="nav-link active" href="">My Articles</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" href="">Global Feed</a>
+              <a class="nav-link" href="">Favorited Articles</a>
             </li>
           </ul>
         </div>
@@ -24,18 +41,15 @@
           <div class="article-preview">
             <div class="article-meta">
               <%= link_to image_tag("#{article.user.image_url}"), "/"  %>
-              <%# <a href="/profile/eric-simons"><img src="http://i.imgur.com/Qr71crq.jpg" /></a> %>
               <div class="info">
                 <%= link_to "#{article.user.name}", user_path(article.user), class: 'date' %>
-                <%# <a href="/profile/eric-simons" class="author">Eric Simons</a> %>
-
                 <%= content_tag :span, "#{article.formatted_created_at}" %>
               </div>
               <button class="btn btn-outline-primary btn-sm pull-xs-right">
                 <i class="ion-heart"></i> 29
               </button>
             </div>
-            <%= link_to(article_path(article.slug), class: 'preview-link') do %>
+            <%= link_to(article, class: 'preview-link') do %>
               <%= content_tag :h1, "#{article.title}"  %>
               <%= content_tag :p, "#{article.description}" %>
               <span>Read more...</span>
@@ -48,19 +62,8 @@
           </div>
         <% end %>
 
-        <%= will_paginate class: 'pagination' %>
-      </div>
+        <%= will_paginate @articles, class: 'pagination' %>
 
-      <div class="col-md-3">
-        <div class="sidebar">
-          <p>Popular Tags</p>
-
-          <div class="tag-list">
-            <% @top_tags.each do |tag| %>
-              <%= link_to "#{tag.name}", "/", class: "tag-pill tag-default" %>
-            <% end %>
-          </div>
-        </div>
       </div>
     </div>
   </div>

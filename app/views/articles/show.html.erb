@@ -18,12 +18,15 @@
           <i class="ion-heart"></i>
           &nbsp; Favorite Post <span class="counter">(29)</span>
         </button>
-        <%= button_to(edit_article_path(@article), {method: :get, class: 'btn btn-sm btn-outline-secondary'} ) do %>
-          <i class="ion-edit"></i> Edit Article
-        <% end %>
+        
+        <% if logged_in? && current_user == @article.user %>
+          <%= button_to(edit_article_path(@article.slug), {method: :get, class: 'btn btn-sm btn-outline-secondary'} ) do %>
+            <i class="ion-edit"></i> Edit Article
+          <% end %>
 
-        <%= link_to(@article, data: { "turbo-method": :delete, turbo_confirm: "really delete this article?" }, class: "btn btn-sm btn-outline-danger") do %>
-          <i class="ion-trash-a"></i> Delete Article
+          <%= link_to(@article, data: { "turbo-method": :delete, turbo_confirm: "really delete this article?" }, class: "btn btn-sm btn-outline-danger") do %>
+            <i class="ion-trash-a"></i> Delete Article
+          <% end %>
         <% end %>
       </div>
     </div>
@@ -66,26 +69,31 @@
           <i class="ion-heart"></i>
           &nbsp; Favorite Article <span class="counter">(29)</span>
         </button>
-        <%= button_to(edit_article_path(@article), {method: :get, class: 'btn btn-sm btn-outline-secondary'} ) do %>
-          <i class="ion-edit"></i> Edit Article
-        <% end %>
-        <%= link_to(@article, data: { "turbo-method": :delete, turbo_confirm: "really delete this article?" }, class: "btn btn-sm btn-outline-danger") do %>
-          <i class="ion-trash-a"></i> Delete Article
+        <% if logged_in? && current_user == @article.user %>
+          <%= button_to(edit_article_path(@article.slug), {method: :get, class: 'btn btn-sm btn-outline-secondary'} ) do %>
+            <i class="ion-edit"></i> Edit Article
+          <% end %>
+          <%= link_to(@article.slug, data: { "turbo-method": :delete, turbo_confirm: "really delete this article?" }, class: "btn btn-sm btn-outline-danger") do %>
+            <i class="ion-trash-a"></i> Delete Article
+          <% end %>
         <% end %>
       </div>
     </div>
 
     <div class="row">
       <div class="col-xs-12 col-md-8 offset-md-2">
-        <form class="card comment-form">
-          <div class="card-block">
-            <textarea class="form-control" placeholder="Write a comment..." rows="3"></textarea>
-          </div>
-          <div class="card-footer">
-            <%= image_tag "#{current_user.image_url}", class: "comment-author-img" %>
-            <button class="btn btn-sm btn-primary">Post Comment</button>
-          </div>
-        </form>
+
+        <% if logged_in? %>
+          <form class="card comment-form">
+            <div class="card-block">
+              <textarea class="form-control" placeholder="Write a comment..." rows="3"></textarea>
+            </div>
+            <div class="card-footer">
+              <%= image_tag "#{current_user.image_url}", class: "comment-author-img" %>
+              <button class="btn btn-sm btn-primary">Post Comment</button>
+            </div>
+          </form>
+        <% end %>
 
         <div class="card">
           <div class="card-block">

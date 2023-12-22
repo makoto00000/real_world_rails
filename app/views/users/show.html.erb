@@ -11,9 +11,12 @@
             <i class="ion-plus-round"></i>
             &nbsp; <%= @user.name %>
           </button>
-          <%= link_to(edit_user_path(@user), class: "btn btn-sm btn-outline-secondary action-btn") do %>
-            <i class="ion-gear-a"></i>
-            &nbsp; Edit Profile Settings
+
+          <% if current_user == @user %>
+            <%= link_to(edit_user_path(@user), class: "btn btn-sm btn-outline-secondary action-btn") do %>
+              <i class="ion-gear-a"></i>
+              &nbsp; Edit Profile Settings
+            <% end %>
           <% end %>
         </div>
       </div>
@@ -59,7 +62,7 @@
           </div>
         <% end %>
 
-        <%# <%= will_paginate class: 'pagination' %> 
+        <%= will_paginate @articles, class: 'pagination' %>
 
       </div>
     </div>

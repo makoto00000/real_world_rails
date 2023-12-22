@@ -1,7 +1,10 @@
 class ArticlesController < ApplicationController
   def index
-    @articles = Article.paginate(page: params[:page])
-    @tags = Tag.all
+    @articles = Article.paginate(page: params[:page], per_page: 10).order(created_at: "DESC")
+    @top_tags = Tag.all.joins(:article_tags)
+                       .group('tags.id')
+                       .order('count(article_tags.tag_id) DESC')
+                       .limit(10)
   end
 
   def new

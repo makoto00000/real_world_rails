@@ -35,7 +35,7 @@
                 <i class="ion-heart"></i> 29
               </button>
             </div>
-            <%= link_to(article, class: 'preview-link') do %>
+            <%= link_to(article_path(article.slug), class: 'preview-link') do %>
               <%= content_tag :h1, "#{article.title}"  %>
               <%= content_tag :p, "#{article.description}" %>
               <span>Read more...</span>
@@ -56,7 +56,7 @@
           <p>Popular Tags</p>
 
           <div class="tag-list">
-            <% @tags.each do |tag| %>
+            <% @top_tags.each do |tag| %>
               <%= link_to "#{tag.name}", "/", class: "tag-pill tag-default" %>
             <% end %>
           </div>

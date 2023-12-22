@@ -1,0 +1,6 @@
+test_article:
+  title: test title
+  description: test description
+  body: test body
+  slug: test-title-111111
+  user: michael

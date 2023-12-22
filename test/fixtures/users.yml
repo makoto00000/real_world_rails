@@ -1,4 +1,6 @@
 michael:
   name: Michael Example
   email: michael@example.com
+  bio: user bio sample
+  image_url: https://loremflickr.com/300/300
   password_digest: <%= User.digest('password') %>

@@ -28,7 +28,6 @@ end
     user.save!
     20.times do
       user.articles.build(
-        slug: Faker::Internet.slug,
         title: Faker::Lorem.sentence,
         description: Faker::Lorem.sentence,
         body: Faker::Lorem.paragraph(sentence_count: 10),

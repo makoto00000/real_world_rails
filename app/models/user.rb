@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   has_many :articles
   before_save :downcase_email
+  before_save :set_password_confirmation
 
   validates :name,
             presence: true,
@@ -29,6 +30,10 @@ class User < ApplicationRecord
 
   def downcase_email
     email.downcase!
+  end
+
+  def set_password_confirmation
+    self.password_confirmation = password
   end
 
 end

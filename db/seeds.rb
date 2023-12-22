@@ -23,7 +23,6 @@ end
     email: Faker::Internet.email,
     bio: Faker::Lorem.sentence,
     password: 'password',
-    password_confirmation: 'password',
     image_url: Faker::LoremFlickr.image
   ) do |user|
     user.save!
